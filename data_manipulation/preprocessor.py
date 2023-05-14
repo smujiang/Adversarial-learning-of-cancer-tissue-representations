@@ -4,9 +4,10 @@ import data_manipulation.utils as utils
 import skimage.io
 import matplotlib.pyplot as plt
 
+
 class Preprocessor:
-    def __init__(self,  patch_h, patch_w, n_channels, dataset, marker, labels=None, overlap=False, set_ratios=[0.8, 0.2],
-                        save_img=False, threshold=215, do_augment=True, project_path=os.getcwd()):
+    def __init__(self, patch_h, patch_w, n_channels, dataset, marker, labels=None, overlap=False, set_ratios=[0.8, 0.2],
+                 save_img=False, threshold=215, do_augment=True, project_path=os.getcwd()):
 
         # Directories and file name handling.
         self.dataset_base = dataset
@@ -46,7 +47,7 @@ class Preprocessor:
                 label_col = ['rosid', 'Survival_2005', 'ER']
             elif 'vgh_survival' in labels:
                 id_col = 'Patient ID'
-                label_col = ['Patient ID', 'Overall Survival', 'ER (IHC)^^'] 
+                label_col = ['Patient ID', 'Overall Survival', 'ER (IHC)^^']
             self.label_dict = self.get_label_dict(table, id_col=id_col, label_col=label_col)
 
         # Loading jpg files.
@@ -74,7 +75,7 @@ class Preprocessor:
         complete = dict()
         # Row defining attributes.
         first_row = table[0]
-        
+
         # Get indexes of fields in row.
         id_col = first_row.index(id_col)
         l_index = list()
@@ -127,35 +128,36 @@ class Preprocessor:
         # height -> y, width -> x.
         height, width, channels = img.shape
         if self.overlap:
-            cut_h = self.patch_h/2
-            cut_w = self.patch_w/2
+            cut_h = self.patch_h / 2
+            cut_w = self.patch_w / 2
         else:
             cut_h = self.patch_h
             cut_w = self.patch_w
 
-        num_y = int(height//cut_h)
-        num_x = int(width//cut_w)
+        num_y = int(height // cut_h)
+        num_x = int(width // cut_w)
 
         # Counts for patches discarted and acknowledged.
         patches_count = 0
         patches_discarted = 0
-        
+
         # Algorithm for patch creation: 1.Overlap, 2.Augmentation, 3.Accepted/Discarted.
-        for i_x in range(0, num_x-1):
-            for i_y in range(0, num_y-1):
+        for i_x in range(0, num_x - 1):
+            for i_y in range(0, num_y - 1):
                 y = i_y * int(cut_h)
                 x = i_x * int(cut_w)
 
                 # Make sure we include the last part of the image in case it is not a round number, for prognosis purpose.
-                if i_y == num_y-1:
+                if i_y == num_y - 1:
                     y = height - self.patch_h
-                if i_x == num_x-1:
+                if i_x == num_x - 1:
                     x = width - self.patch_w
 
                 pos = (y, x)
                 # Gets patch, flipped horizontally but not rotated or normalized.
-                patch = utils.get_augmented_patch(self.dataset_path, filename, (None,) + pos + (0, 0), self.patch_h, self.patch_w, norm=False)
-                
+                patch = utils.get_augmented_patch(self.dataset_path, filename, (None,) + pos + (0, 0), self.patch_h,
+                                                  self.patch_w, norm=False)
+
                 # Make sure that the patch wasn't created at this position before and that it goes above the threshold.
                 # if overlap: 4 rotations and 2 flips per rotation -> x8.
                 if pos not in patches and self.satisfactory(patch, self.threshold):
@@ -167,7 +169,7 @@ class Preprocessor:
                                 yield pos + (rot, flip)
                     else:
                         patches_count += 1
-                        yield pos + (0,0)
+                        yield pos + (0, 0)
                 else:
                     print('Patch with more than 30% of white', filename, 'Position:', pos)
                     patches_discarted += 1
@@ -179,6 +181,7 @@ class Preprocessor:
     set_test  = [('223___2_114_13_6.jpg', 41.1231265464) , ...]
     augmentation = []
     '''
+
     def augment(self, sets, augmentations):
         # For train and test lists.
         for set_, augmentation_set in zip(sets, augmentations):
@@ -249,7 +252,8 @@ class Preprocessor:
             if len(sets[index]) == 0:
                 print('%s set is empty, allocation is 1.0 to 0.0' % s)
                 continue
-            utils.get_and_save_patch(augmentations[index], sets[index], self.hdf5[index], self.dataset_path, t_path, self.patch_h, self.patch_w, self.n_channels, save=save)
+            utils.get_and_save_patch(augmentations[index], sets[index], self.hdf5[index], self.dataset_path, t_path,
+                                     self.patch_h, self.patch_w, self.n_channels, save=save)
 
     # Run dataset processing algoroithm.
     def run(self):

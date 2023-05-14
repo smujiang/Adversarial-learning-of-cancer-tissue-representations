@@ -1,15 +1,28 @@
 # Adversarial learning of cancer tissue representations
- * **[Quiros A.C., Coudray N., Yeaton A., Wisuwat W., Murray-Smith R., Tsirigos A., Yuan K. Adversarial learning of cancer tissue representations. Proceedings of The 24th International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) 2021](http://arxiv.org/abs/2108.02223)** 
+
+* **[Quiros A.C., Coudray N., Yeaton A., Wisuwat W., Murray-Smith R., Tsirigos A., Yuan K. Adversarial learning of cancer tissue representations. Proceedings of The 24th International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) 2021](http://arxiv.org/abs/2108.02223)**
 
 **Abstract:**
 
-*Deep learning based analysis of histopathology images shows promise in advancing understanding of tumor progression, tumor micro-environment, and their underpinning biological processes. So far, these approaches have focused on extracting information associated with annotations. In this work, we ask how much information can be learned from the tissue architecture itself.*
+*Deep learning based analysis of histopathology images shows promise in advancing understanding of tumor progression,
+tumor micro-environment, and their underpinning biological processes. So far, these approaches have focused on
+extracting information associated with annotations. In this work, we ask how much information can be learned from the
+tissue architecture itself.*
 
-*We present an adversarial learning model to extract feature representations of cancer tissue, without the need for manual annotations. We show that these representations are able to identify a variety of morphological characteristics across three cancer types: Breast, colon, and lung. This is supported by 1) the separation of morphologic characteristics in the latent space; 2) the ability to classify tissue type with logistic regression using latent representations, with an AUC of 0.97 and 85% accuracy, comparable to supervised deep models; 3) the ability to predict the presence of tumor in Whole Slide Images (WSIs) using multiple instance learning (MIL), achieving an AUC of 0.98 and 94% accuracy.*
+*We present an adversarial learning model to extract feature representations of cancer tissue, without the need for
+manual annotations. We show that these representations are able to identify a variety of morphological characteristics
+across three cancer types: Breast, colon, and lung. This is supported by 1) the separation of morphologic
+characteristics in the latent space; 2) the ability to classify tissue type with logistic regression using latent
+representations, with an AUC of 0.97 and 85% accuracy, comparable to supervised deep models; 3) the ability to predict
+the presence of tumor in Whole Slide Images (WSIs) using multiple instance learning (MIL), achieving an AUC of 0.98 and
+94% accuracy.*
 
-*Our results show that our model captures distinct phenotypic characteristics of real tissue samples, paving the way for further understanding of tumor progression and tumor micro-environment, and ultimately refining histopathological classification for diagnosis and treatment.*
+*Our results show that our model captures distinct phenotypic characteristics of real tissue samples, paving the way for
+further understanding of tumor progression and tumor micro-environment, and ultimately refining histopathological
+classification for diagnosis and treatment.*
 
 ## Citation
+
 ```
 @InProceedings{quiros2021adversarial,
   title={Adversarial learning of cancer tissue representations},
@@ -21,53 +34,95 @@
 ```
 
 ## Demo Materials:
-* [**Tissue Reconstructions**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/tree/main/demos/reconstructions):
-  - **(a)** Real tissue images, **(b)** Reconstructed images with PathologyGAN.
+
+* [**Tissue
+  Reconstructions**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/tree/main/demos/reconstructions):
+    - **(a)** Real tissue images, **(b)** Reconstructed images with PathologyGAN.
   <p align="center">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/41d707a72e56124aa518067ea1252eddb73e13e2/demos/reconstructions/PathologyGAN_Encoder_reconstructions.jpg">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/41d707a72e56124aa518067ea1252eddb73e13e2/demos/reconstructions/vgh_nki_norm/vgh_nki_norm_img_recon_1.jpg">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/41d707a72e56124aa518067ea1252eddb73e13e2/demos/reconstructions/nct/nct_img_recon_0.jpg">
   </p>
-  
-* [**Latent Space Visualizations**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/main/demos/latent_space):
-   * Uniform Manifold Approximation and Projection (UMAP) vectors of PathologyGAN's latent representations, breast cancer tissue from NKI and VGH (left image) and colorectal cancer tissue from NCT (right image). Breast cancer tissue images are labeled using cancer cell counts, class 8 accounting for the largest cell number. Colorectal cancer tissue images are labeled based on their tissue type.
+
+* [**Latent Space
+  Visualizations**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/main/demos/latent_space):
+    * Uniform Manifold Approximation and Projection (UMAP) vectors of PathologyGAN's latent representations, breast
+      cancer tissue from NKI and VGH (left image) and colorectal cancer tissue from NCT (right image). Breast cancer
+      tissue images are labeled using cancer cell counts, class 8 accounting for the largest cell number. Colorectal
+      cancer tissue images are labeled based on their tissue type.
   <p align="center">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/c98d1738c7e031a5790315e171b2e61388cbf11f/demos/latent_space/nct/UMAP_latent_space_test_radius_1p51.png" width="400">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/c98d1738c7e031a5790315e171b2e61388cbf11f/demos/latent_space/vgh_nki_norm/UMAP_latent_space_test_radius_1p01.png" width="400">
   </p>
 
-* [**Latent Representations on Multiple Instance Learning**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/main/demos/latent_space):
-   * Uniform Manifold Approximation and Projection (UMAP) vectors of lung cancer tissue representations. We labeled each patch of the WSI with the corresponding label subject to presence of tumor in the WSI, and highlight images and representations where the attention-based deep MIL focuses to predict the outcome. 
+* [**Latent Representations on Multiple Instance
+  Learning**](https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/main/demos/latent_space):
+    * Uniform Manifold Approximation and Projection (UMAP) vectors of lung cancer tissue representations. We labeled
+      each patch of the WSI with the corresponding label subject to presence of tumor in the WSI, and highlight images
+      and representations where the attention-based deep MIL focuses to predict the outcome.
+
 <p align="center">
     <img src="https://github.com/AdalbertoCq/Adversarial-learning-of-cancer-tissue-representations/blob/c98d1738c7e031a5790315e171b2e61388cbf11f/demos/latent_space/TCGAFrozen/TCGAFrozen_att_MIL_latent.jpg" width="600">
   </p>
 
 ## Datasets:
+
 ### H&E Breast Cancer
-H&E breast cancer databases from the Netherlands Cancer Institute (NKI) cohort and the Vancouver General Hospital (VGH) cohort with 248 and 328 patients respectevely. Each of them include tissue micro-array (TMA) images, along with clinical patient data such as survival time, and estrogen-receptor (ER) status. The original TMA images all have a resolution of 1128x720 pixels, and we split each of the images into smaller patches of 224x224, and allow them to overlap by 50%. We also perform data augmentation on these images, a rotation of 90 degrees, and 180 degrees, and vertical and horizontal inversion. We filter out images in which the tissue covers less than 70% of the area. In total this yields a training set of 249K images, and a test set of 62K.
 
-We use these Netherlands Cancer Institute (NKI) cohort and the Vancouver General Hospital (VGH) previously used in Beck et al. \[1]. These TMA images are from the [Stanford Tissue Microarray Database](https://tma.im/cgi-bin/home.pl)[2]
+H&E breast cancer databases from the Netherlands Cancer Institute (NKI) cohort and the Vancouver General Hospital (VGH)
+cohort with 248 and 328 patients respectevely. Each of them include tissue micro-array (TMA) images, along with clinical
+patient data such as survival time, and estrogen-receptor (ER) status. The original TMA images all have a resolution of
+1128x720 pixels, and we split each of the images into smaller patches of 224x224, and allow them to overlap by 50%. We
+also perform data augmentation on these images, a rotation of 90 degrees, and 180 degrees, and vertical and horizontal
+inversion. We filter out images in which the tissue covers less than 70% of the area. In total this yields a training
+set of 249K images, and a test set of 62K.
 
-You can find a pre-processed HDF5 file with patches of 224x224x3 resolution [here](https://drive.google.com/open?id=1LpgW85CVA48C8LnpmsDMdHqeCGHKsAxw), each of the patches also contains labeling information of the estrogen receptor status and survival time.
+We use these Netherlands Cancer Institute (NKI) cohort and the Vancouver General Hospital (VGH) previously used in Beck
+et al. \[1]. These TMA images are from the [Stanford Tissue Microarray Database](https://tma.im/cgi-bin/home.pl)[2]
+
+You can find a pre-processed HDF5 file with patches of 224x224x3
+resolution [here](https://drive.google.com/open?id=1LpgW85CVA48C8LnpmsDMdHqeCGHKsAxw), each of the patches also contains
+labeling information of the estrogen receptor status and survival time.
 
 ### H&E Colorectal Cancer
-The H&E colorectal cancer dataset can be found [here](https://zenodo.org/record/1214456#.XyAAxPhKgkg). The dataset from National Center for Tumor diseases (NCT, Germany) [3] provides tissue images of 224×224 resolution with an as- sociated type of tissue label: Adipose, background, debris, lymphocytes, mucus, smooth muscle, normal colon mucosa, cancer-associated stroma, and colorectal adenocarcinoma epithelium (tumor). The dataset is divided into a training set of 100K tissue tiles and 86 patients, and a test set of 7K tissue tiles and 50 patients, there is no overlapping patients between train and test sets. 
+
+The H&E colorectal cancer dataset can be found [here](https://zenodo.org/record/1214456#.XyAAxPhKgkg). The dataset from
+National Center for Tumor diseases (NCT, Germany) [3] provides tissue images of 224×224 resolution with an as- sociated
+type of tissue label: Adipose, background, debris, lymphocytes, mucus, smooth muscle, normal colon mucosa,
+cancer-associated stroma, and colorectal adenocarcinoma epithelium (tumor). The dataset is divided into a training set
+of 100K tissue tiles and 86 patients, and a test set of 7K tissue tiles and 50 patients, there is no overlapping
+patients between train and test sets.
 
 ### H&E Lung Cancer
-The H&E lung cancer dataset can be found at [The Cancer Genome Atlas (TCGA)](https://portal.gdc.cancer.gov). It contains samples with adenocarcinoma (LUAD), squamous cell carcinoma (LUSC), and normal tissue, composed by 1807 Whole Slide Images (WSIs) of 1184 patients. We make use of the pipeline provided in Coudray et al. [4],  diving each WSI into patches of 224x224 and filtering out images with less than 50% tissue in total area and apply stain normalization [5]. In addition, we label each slide as tumor and non-tumor depending on the presence of lung cancer in the tissue. Finally, we split the dataset into a training set of 916K tissue patches and 666 patients, and a test set of 569K tissue patches and 518 patients, with no overlapping patients between both sets. We use this dataset to apply multiple instance learning (MIL) over latent representations, testing the performance to predict the presence of tumor in the WSI.
 
-\[1] Beck, A.H. and Sangoi, A.R. and Leung, S. Systematic analysis of breast cancer morphology uncovers stromal features associated with survival. Science translational medicine, 2018.
+The H&E lung cancer dataset can be found at [The Cancer Genome Atlas (TCGA)](https://portal.gdc.cancer.gov). It contains
+samples with adenocarcinoma (LUAD), squamous cell carcinoma (LUSC), and normal tissue, composed by 1807 Whole Slide
+Images (WSIs) of 1184 patients. We make use of the pipeline provided in Coudray et al. [4], diving each WSI into patches
+of 224x224 and filtering out images with less than 50% tissue in total area and apply stain normalization [5]. In
+addition, we label each slide as tumor and non-tumor depending on the presence of lung cancer in the tissue. Finally, we
+split the dataset into a training set of 916K tissue patches and 666 patients, and a test set of 569K tissue patches and
+518 patients, with no overlapping patients between both sets. We use this dataset to apply multiple instance learning (
+MIL) over latent representations, testing the performance to predict the presence of tumor in the WSI.
 
-\[2] Robert J. Marinelli, Kelli Montgomery, Chih Long Liu, Nigam H. Shah, Wijan Prapong, Michael Nitzberg, Zachariah K. Zachariah, Gavin J. Sherlock, Yasodha Natkunam, Robert B. West, Matt van de Rijn, Patrick O. Brown, and Catherine A. Ball. The Stanford Tissue Microarray Database. Nucleic Acids Res 2008 36(Database issue): D871-7. Epub 2007.
+\[1] Beck, A.H. and Sangoi, A.R. and Leung, S. Systematic analysis of breast cancer morphology uncovers stromal features
+associated with survival. Science translational medicine, 2018.
 
-\[3] Kather, J.N., Halama, N., Marx, A.: 100,000 histological images of human colorectal cancer and healthy tissue, 2018.
+\[2] Robert J. Marinelli, Kelli Montgomery, Chih Long Liu, Nigam H. Shah, Wijan Prapong, Michael Nitzberg, Zachariah K.
+Zachariah, Gavin J. Sherlock, Yasodha Natkunam, Robert B. West, Matt van de Rijn, Patrick O. Brown, and Catherine A.
+Ball. The Stanford Tissue Microarray Database. Nucleic Acids Res 2008 36(Database issue): D871-7. Epub 2007.
 
-\[4] Coudray, N., Ocampo, P.S., Sakellaropoulos, T., Narula, N., Snuderl, M., Fenyo ̈, D., Moreira, A.L., Razavian, N., Tsirigos, A.: Classification and mutation predic- tion from non–small cell lung cancer histopathology images using deep learning. Nature Medicine, 2018.
+\[3] Kather, J.N., Halama, N., Marx, A.: 100,000 histological images of human colorectal cancer and healthy tissue,
+2018.
 
-\[5] Reinhard, E., Adhikhmin, M., Gooch, B., Shirley, P.: Color transfer be- tween images. IEEE Computer Graphics and Applications, 2001.
+\[4] Coudray, N., Ocampo, P.S., Sakellaropoulos, T., Narula, N., Snuderl, M., Fenyo ̈, D., Moreira, A.L., Razavian, N.,
+Tsirigos, A.: Classification and mutation predic- tion from non–small cell lung cancer histopathology images using deep
+learning. Nature Medicine, 2018.
 
+\[5] Reinhard, E., Adhikhmin, M., Gooch, B., Shirley, P.: Color transfer be- tween images. IEEE Computer Graphics and
+Applications, 2001.
 
 ## Python Enviroment:
+
 ```
 h5py                    2.9.0
 numpy                   1.16.1
@@ -84,10 +139,17 @@ python                  3.6.7
 ```
 
 ## Pre-trained Models:
-You can find pre-trained weights for the breast cancer trained model [here](https://figshare.com/articles/conference_contribution/Adversarial_learning_of_cancer_tissue_representations_-_Breast_Cancer/15108654) and colorectal cancer trained model [here](https://figshare.com/articles/conference_contribution/Adversarial_learning_of_cancer_tissue_representations_-_Colorectal_Cancer/15108705)
+
+You can find pre-trained weights for the breast cancer trained
+model [here](https://figshare.com/articles/conference_contribution/Adversarial_learning_of_cancer_tissue_representations_-_Breast_Cancer/15108654)
+and colorectal cancer trained
+model [here](https://figshare.com/articles/conference_contribution/Adversarial_learning_of_cancer_tissue_representations_-_Colorectal_Cancer/15108705)
 
 ## Training the model:
-You can find a pre-processed HDF5 file with patches of 224x224x3 resolution of the H&E breast cancer dataset [here](https://drive.google.com/open?id=1LpgW85CVA48C8LnpmsDMdHqeCGHKsAxw). Place the 'vgh_nki' under the 'datasets' folder in the main 'Adversarial-learning-of-cancer-tissue-representations' path.
+
+You can find a pre-processed HDF5 file with patches of 224x224x3 resolution of the H&E breast cancer
+dataset [here](https://drive.google.com/open?id=1LpgW85CVA48C8LnpmsDMdHqeCGHKsAxw). Place the 'vgh_nki' under the '
+datasets' folder in the main 'Adversarial-learning-of-cancer-tissue-representations' path.
 
 Each model was trained on an NVIDIA Titan RTX 24 GB for 45 epochs, approximately 72 hours.
 
@@ -120,12 +182,16 @@ optional arguments:
 ```
 
 * Command example:
+
 ```
 python3 run_pathgan_encoder.py 
 ```
 
 ## Projecting images onto the latent space:
-Once you have a trained model you can project images into the latent space, the vector represenetation will be placed in 'results' folder on an H5 file.
+
+Once you have a trained model you can project images into the latent space, the vector represenetation will be placed
+in 'results' folder on an H5 file.
+
 ```
 usage: project_real_tissue_latent_space.py [-h] --checkpoint CHECKPOINT
                                            --real_hdf5 REAL_HDF5

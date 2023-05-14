@@ -4,7 +4,8 @@ from data_manipulation.utils import inception_feature_labels
 
 
 class Dataset:
-    def __init__(self, hdf5_path, patch_h, patch_w, n_channels, batch_size, thresholds=(), labels=None, empty=False, num_clusters=500, clust_percent=1.0):
+    def __init__(self, hdf5_path, patch_h, patch_w, n_channels, batch_size, thresholds=(), labels=None, empty=False,
+                 num_clusters=500, clust_percent=1.0):
 
         self.i = 0
         self.batch_size = batch_size
@@ -34,7 +35,7 @@ class Dataset:
                 self.images, self.labels = self.get_hdf5_data()
 
             self.size = len(self.images)
-            self.iterations = len(self.images)//self.batch_size + 1
+            self.iterations = len(self.images) // self.batch_size + 1
         else:
             self.images = list()
             self.labels = list()
@@ -60,9 +61,9 @@ class Dataset:
         if 'images' in naming:
             image_name = 'images'
             if labels_name is None:
-                labels_name = 'labels'       
+                labels_name = 'labels'
         else:
-            for naming in list(hdf5_file.keys()):     
+            for naming in list(hdf5_file.keys()):
                 print(naming)
                 if 'img' in naming or 'image' in naming:
                     image_name = naming
@@ -72,10 +73,14 @@ class Dataset:
         images = hdf5_file[image_name]
         if self.labels_flag:
             if self.labels_name == 'inception':
-                labels, embedding = inception_feature_labels(self.hdf5_path, image_name, self.patch_h, self.patch_w, self.n_channels, self.num_clusters, self.clust_percent, set_type=self.labels_name)
+                labels, embedding = inception_feature_labels(self.hdf5_path, image_name, self.patch_h, self.patch_w,
+                                                             self.n_channels, self.num_clusters, self.clust_percent,
+                                                             set_type=self.labels_name)
                 return images, labels, embedding
             elif self.labels_name == 'self':
-                labels, embedding = inception_feature_labels(self.hdf5_path, image_name, self.patch_h, self.patch_w, self.n_channels, self.num_clusters, self.clust_percent, set_type=self.labels_name)
+                labels, embedding = inception_feature_labels(self.hdf5_path, image_name, self.patch_h, self.patch_w,
+                                                             self.n_channels, self.num_clusters, self.clust_percent,
+                                                             set_type=self.labels_name)
                 return images, labels, embedding
             else:
                 labels = hdf5_file[labels_name]
@@ -123,4 +128,4 @@ class Dataset:
             batch_labels = np.concatenate((batch_labels, self.labels[:delta]), axis=0)
             self.i = delta
             self.done = True
-        return batch_img/255.0, batch_labels
+        return batch_img / 255.0, batch_labels

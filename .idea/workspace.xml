@@ -1,7 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="59316d43-8176-42dd-aaf0-c6aa9d0a8d29" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_interpolation/interpolate_img.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_run_pathgan_encoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_run_pathgan_encoder_TSR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_testing/convert_hd5_img_data_type.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_testing/hd5_check_tsr.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_testing/my_project_real_tissue_latent_space.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_training/check_training_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_training/prepare_all_datat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_training/prepare_train_val_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normalization/color_deconv_demo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normalization/pretrained_cGAN_gen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normalization/tf_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_manipulation/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manipulation/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_manipulation/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manipulation/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_manipulation/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manipulation/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_manipulation/preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manipulation/preprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_manipulation/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manipulation/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/activations.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/activations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/clustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/clustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/data_augmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/data_augmentation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/latent_space.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/latent_space.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/prognosis.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/prognosis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/evaluation/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/evaluation/tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/generative/gans/GAN.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/generative/gans/GAN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/generative/gans/PathologyGAN.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/generative/gans/PathologyGAN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/generative/gans/PathologyGAN_Encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/generative/gans/PathologyGAN_Encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/mil/Attention_MIL.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/mil/Attention_MIL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/networks/discriminator.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/networks/discriminator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/networks/encoder_gan.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/networks/encoder_gan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/networks/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/networks/generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/normalization.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/normalization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/nuance.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/nuance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/regularizers.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/regularizers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_real_tissue_latent_space.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_real_tissue_latent_space.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_attention_mil_TCGA.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_attention_mil_TCGA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_pathgan_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_pathgan_encoder.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2PYqKMfvGpR0EllsX2CG9FmSZtL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="59316d43-8176-42dd-aaf0-c6aa9d0a8d29" name="Changes" comment="" />
+      <created>1683644297645</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683644297645</updated>
+      <workItem from="1683644299206" duration="5261000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

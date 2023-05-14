@@ -3,7 +3,8 @@ from data_manipulation.dataset import Dataset
 
 
 class Data:
-    def __init__(self, dataset, marker, patch_h, patch_w, n_channels, batch_size, project_path=os.getcwd(), thresholds=(), labels=None, empty=False, num_clusters=500, clust_percent=1.0):
+    def __init__(self, dataset, marker, patch_h, patch_w, n_channels, batch_size, project_path=os.getcwd(),
+                 thresholds=(), labels=None, empty=False, num_clusters=500, clust_percent=1.0):
 
         # Directories and file name handling.
         self.dataset = dataset
@@ -24,18 +25,22 @@ class Data:
         print('Train Set:', self.hdf5_train)
         self.training = None
         if os.path.isfile(self.hdf5_train):
-            self.training = Dataset(self.hdf5_train, patch_h, patch_w, n_channels, batch_size=batch_size, thresholds=thresholds, labels=labels, empty=empty, num_clusters=num_clusters, clust_percent=clust_percent)
-        
+            self.training = Dataset(self.hdf5_train, patch_h, patch_w, n_channels, batch_size=batch_size,
+                                    thresholds=thresholds, labels=labels, empty=empty, num_clusters=num_clusters,
+                                    clust_percent=clust_percent)
+
         # Validation dataset, some datasets work with those.
         self.hdf5_validation = os.path.join(self.pathes_path, 'hdf5_%s_validation.h5' % self.dataset_name)
         print('Validation Set:', self.hdf5_validation)
         self.validation = None
         if os.path.isfile(self.hdf5_validation):
-            self.validation = Dataset(self.hdf5_validation, patch_h, patch_w, n_channels, batch_size=batch_size, thresholds=thresholds, labels=None, empty=empty)
+            self.validation = Dataset(self.hdf5_validation, patch_h, patch_w, n_channels, batch_size=batch_size,
+                                      thresholds=thresholds, labels=None, empty=empty)
 
         # Test dataset
         self.hdf5_test = os.path.join(self.pathes_path, 'hdf5_%s_test.h5' % self.dataset_name)
         print('Test Set:', self.hdf5_test)
         self.test = None
         if os.path.isfile(self.hdf5_test):
-            self.test = Dataset(self.hdf5_test, patch_h, patch_w, n_channels, batch_size=batch_size, thresholds=thresholds, labels=None, empty=empty)
+            self.test = Dataset(self.hdf5_test, patch_h, patch_w, n_channels, batch_size=batch_size,
+                                thresholds=thresholds, labels=None, empty=empty)

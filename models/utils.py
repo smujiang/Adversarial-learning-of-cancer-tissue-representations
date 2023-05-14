@@ -24,7 +24,7 @@ def plot_images(plt_num, images, dim1=None, dim2=None, wspace=None, title=None, 
     if title is not None:
         fig.suptitle(title)
     for i in range(0, plt_num):
-        fig.add_subplot(1, 10, i+1)
+        fig.add_subplot(1, 10, i + 1)
         img = images[i, :, :, :]
         plt.imshow(img)
         plt.axis(axis)
@@ -34,7 +34,7 @@ def plot_images(plt_num, images, dim1=None, dim2=None, wspace=None, title=None, 
 
 
 # Plot and save figure of losses.
-def save_loss(losses, data_out_path, dim):    
+def save_loss(losses, data_out_path, dim):
     mpl.rcParams["figure.figsize"] = dim, dim
     plt.rcParams.update({'font.size': 22})
     losses = np.array(losses)
@@ -66,10 +66,10 @@ def get_checkpoint(data_out_path, which=0):
 
 def update_csv(model, file, variables, epoch, iteration, losses):
     with open(file, 'a') as csv_file:
-        if 'loss' in file: 
+        if 'loss' in file:
             header = ['Epoch', 'Iteration']
             header.extend(losses)
-            writer = csv.DictWriter(csv_file, fieldnames = header)
+            writer = csv.DictWriter(csv_file, fieldnames=header)
             line = dict()
             line['Epoch'] = epoch
             line['Iteration'] = iteration
@@ -79,7 +79,7 @@ def update_csv(model, file, variables, epoch, iteration, losses):
             header = ['Epoch', 'Iteration']
             header.extend([str(v.name.split(':')[0].replace('/', '_')) for v in model.gen_filters])
             header.extend([str(v.name.split(':')[0].replace('/', '_')) for v in model.dis_filters])
-            writer = csv.DictWriter(csv_file, fieldnames = header)
+            writer = csv.DictWriter(csv_file, fieldnames=header)
             line = dict()
             line['Epoch'] = epoch
             line['Iteration'] = iteration
@@ -108,8 +108,7 @@ def setup_csvs(csvs, model, losses, restore=False):
             writer = csv.DictWriter(csv_file, fieldnames=header)
             writer.writeheader()
 
-        if len(csvs) > 1: 
-
+        if len(csvs) > 1:
             filters_s_csv, jacob_s_csv, hessian_s_csv = csvs[1:]
 
             header = ['Epoch', 'Iteration']
@@ -128,7 +127,7 @@ def setup_csvs(csvs, model, losses, restore=False):
             with open(hessian_s_csv, 'w') as csv_file:
                 writer = csv.writer(csv_file)
                 writer.writerow(header)
-            
+
 
 # Setup output folder.
 def setup_output(data_out_path, model_name, restore, additional_loss=False):
@@ -137,7 +136,7 @@ def setup_output(data_out_path, model_name, restore, additional_loss=False):
     checkpoints_path = os.path.join(data_out_path, 'checkpoints')
     checkpoints = os.path.join(checkpoints_path, '%s.ckt' % model_name)
     gen_images_path = os.path.join(data_out_path, 'images')
-    
+
     if not restore:
         if os.path.isdir(checkpoints_path):
             shutil.rmtree(checkpoints_path)
@@ -148,7 +147,7 @@ def setup_output(data_out_path, model_name, restore, additional_loss=False):
         if os.path.isdir(results_path):
             shutil.rmtree(results_path)
         os.makedirs(results_path)
-    
+
     loss_csv = os.path.join(data_out_path, 'loss.csv')
     if additional_loss:
         loss_csv_2 = os.path.join(data_out_path, 'loss_add.csv')
@@ -156,16 +155,18 @@ def setup_output(data_out_path, model_name, restore, additional_loss=False):
 
     return checkpoints, [loss_csv]
 
+
 # Run session to generate output samples.
-def show_generated(session, z_input, z_dim, output_fake, n_images, label_input=None, labels=None, c_input=None, c_dim=None, dim=20, show=True):
+def show_generated(session, z_input, z_dim, output_fake, n_images, label_input=None, labels=None, c_input=None,
+                   c_dim=None, dim=20, show=True):
     gen_samples = list()
     sample_z = list()
     batch_sample = 20
     for x in range(n_images):
-        rand_sample = random.randint(0,batch_sample-1)
-        
+        rand_sample = random.randint(0, batch_sample - 1)
+
         z_batch = np.random.uniform(low=-1., high=1., size=(batch_sample, z_dim))
-        feed_dict = {z_input:z_batch}
+        feed_dict = {z_input: z_batch}
         if c_input is not None:
             c_batch = np.random.normal(loc=0.0, scale=1.0, size=(batch_sample, c_dim))
             feed_dict[c_input] = c_batch
@@ -175,7 +176,7 @@ def show_generated(session, z_input, z_dim, output_fake, n_images, label_input=N
         gen_samples.append(gen_batch[rand_sample, :, :, :])
         sample_z.append(z_batch[rand_sample, :])
     if show:
-        plot_images(plt_num=n_images, images=np.array(gen_samples), dim=dim)    
+        plot_images(plt_num=n_images, images=np.array(gen_samples), dim=dim)
     return np.array(gen_samples), np.array(sample_z)
 
 
@@ -227,7 +228,7 @@ def retrieve_csv_data(csv_file, limit_head=2, limit_row=None, sing=0):
                     value = value.replace('j_', 'j ')
                     value = [complex(val).real for val in value.split(' ')]
                     if sing is None:
-                        value = value[0]/value[1]
+                        value = value[0] / value[1]
                     else:
                         value = value[sing]
                 elif 'j' in value:
@@ -245,10 +246,11 @@ def retrieve_csv_data(csv_file, limit_head=2, limit_row=None, sing=0):
                     value = float(value)
                 dictionary[field].append(value)
 
-    if 'jacobian' in  csv_file:
+    if 'jacobian' in csv_file:
         dictionary['Ratio Max/Min'] = list()
         for p in [i for i in range(len(dictionary['Iteration']))]:
-            dictionary['Ratio Max/Min'].append(np.log(dictionary['Jacobian Max Singular'][p]/dictionary['Jacobian Min Singular'][p]))
+            dictionary['Ratio Max/Min'].append(
+                np.log(dictionary['Jacobian Max Singular'][p] / dictionary['Jacobian Min Singular'][p]))
 
     return dictionary
 
@@ -275,14 +277,14 @@ def plot_data(data1, data2=None, filter1=[], filter2=[], dim=20, total_axis=20, 
         flag = False
         for exclude in exclude1:
             if exclude in field:
-                flag=True
+                flag = True
                 break
         if flag: continue
-        ax1.plot(points, data1['data'][field], label='%s %s' %(data1['name'].split(' ')[1],field), color=colors[ind])
+        ax1.plot(points, data1['data'][field], label='%s %s' % (data1['name'].split(' ')[1], field), color=colors[ind])
         ind += 1
 
-    every = int(len(points)/total_axis)
-    if every == 0: every =1
+    every = int(len(points) / total_axis)
+    if every == 0: every = 1
     plt.xticks(points[0::every], data1['data']['Iteration'][0::every], rotation=45)
     plt.legend(loc='upper left')
 
@@ -291,9 +293,9 @@ def plot_data(data1, data2=None, filter1=[], filter2=[], dim=20, total_axis=20, 
         exclude2 = list()
         exclude2.extend(exclude_b)
         exclude2.extend(filter2)
-        if not same:   
-            ax2 = ax1.twinx()  
-            ax2.set_ylabel(data2['name']) 
+        if not same:
+            ax2 = ax1.twinx()
+            ax2.set_ylabel(data2['name'])
             plot = ax2
         else:
             plot = ax1
@@ -301,16 +303,18 @@ def plot_data(data1, data2=None, filter1=[], filter2=[], dim=20, total_axis=20, 
             flag = False
             for exclude in exclude2:
                 if exclude in field:
-                    flag=True
+                    flag = True
                     break
             if flag: continue
-            plot.plot(points, data2['data'][field], label='%s %s' %(data2['name'].split(' ')[1],field), color=colors[ind])
+            plot.plot(points, data2['data'][field], label='%s %s' % (data2['name'].split(' ')[1], field),
+                      color=colors[ind])
             ind += 1
         plt.xticks(points[0::every], data2['data']['Iteration'][0::every], rotation=45)
 
         fig.tight_layout()  # otherwise the right y-label is slightly clipped
         plt.legend(loc='upper right')
     plt.show()
+
 
 def display_activations(layer_activations, image, images_row, dim=None):
     if dim is not None:
@@ -319,25 +323,27 @@ def display_activations(layer_activations, image, images_row, dim=None):
     num_channels = layer_activations.shape[-1]
     img_width = layer_activations.shape[2]
     img_height = layer_activations.shape[1]
-    rows = math.ceil(num_channels/images_row)
-    grid = np.zeros((img_height*rows, img_width*images_row))
-    
+    rows = math.ceil(num_channels / images_row)
+    grid = np.zeros((img_height * rows, img_width * images_row))
+
     print('Number of Channels:', num_channels)
     print('Number of Rows:', rows)
     for channel in range(num_channels):
         channel_image = layer_activations[image, :, :, channel]
-        channel_image -= channel_image.mean() 
+        channel_image -= channel_image.mean()
         channel_image /= channel_image.std()
         channel_image *= 64
         channel_image += 128
         channel_image = np.clip(channel_image, 0, 255).astype('uint8')
-        grid_row = int(channel/images_row)
-        grid_col = channel%images_row
-        grid[grid_row*img_height : grid_row*img_height + img_height, grid_col*img_width: grid_col*img_width + img_width] = channel_image
+        grid_row = int(channel / images_row)
+        grid_col = channel % images_row
+        grid[grid_row * img_height: grid_row * img_height + img_height,
+        grid_col * img_width: grid_col * img_width + img_width] = channel_image
 
     scale = 1. / num_channels
     plt.figure(figsize=(scale * grid.shape[1], scale * grid.shape[0]))
     plt.matshow(grid)
+
 
 def to_categorical(y, num_classes=None, dtype='float32'):
     y = np.array(y, dtype='int')
@@ -374,17 +380,18 @@ def save_fold_performance(data_out_path, fold_losses, folds_metrics, file_name):
             train_metrics, valid_metrics, test_metrics = fold_metrics
             train_accuracy, train_recall, train_precision, train_auc, _, _, _ = train_metrics
             valid_accuracy, valid_recall, valid_precision, valid_auc, _, _, _ = valid_metrics
-            test_accuracy,  test_recall,  test_precision,  test_auc,  _,  _,  _  = test_metrics
-            metrics = [train_accuracy, valid_accuracy, test_accuracy, train_auc, valid_auc, test_auc, train_recall, valid_recall, test_recall, train_precision, valid_precision, test_precision]
+            test_accuracy, test_recall, test_precision, test_auc, _, _, _ = test_metrics
+            metrics = [train_accuracy, valid_accuracy, test_accuracy, train_auc, valid_auc, test_auc, train_recall,
+                       valid_recall, test_recall, train_precision, valid_precision, test_precision]
             for ind, val in enumerate(fold_losses[1:]):
                 line[val] = metrics[ind]
                 if ind < 6:
-                    metrics_ms[i,ind] = metrics[ind][0]
+                    metrics_ms[i, ind] = metrics[ind][0]
             writer.writerow(line)
 
         line = dict()
         line['Fold'] = 'Mean'
-        means = np.round(np.mean(metrics_ms, axis=0),3)
+        means = np.round(np.mean(metrics_ms, axis=0), 3)
         for ind, val in enumerate(fold_losses[1:]):
             if ind < 6:
                 line[val] = means[ind]
@@ -394,14 +401,15 @@ def save_fold_performance(data_out_path, fold_losses, folds_metrics, file_name):
 
         line = dict()
         line['Fold'] = 'Std'
-        std = np.round(np.std(metrics_ms, axis=0),3)
+        std = np.round(np.std(metrics_ms, axis=0), 3)
         for ind, val in enumerate(fold_losses[1:]):
             if ind < 6:
                 line[val] = std[ind]
             else:
                 line[val] = ''
         writer.writerow(line)
-    
+
+
 def save_unique_samples(data_out_path, train_class_set, valid_class_set, test_class_set, file_name):
     file_path = os.path.join(data_out_path, file_name)
     with open(file_path, 'w') as content:
@@ -411,40 +419,42 @@ def save_unique_samples(data_out_path, train_class_set, valid_class_set, test_cl
             content.write('\tLabels: %s \n' % str(uniq))
             content.write('\tCounts: %s \n' % str(counts))
 
+
 # Save relevant tiles for the outcome, allows to visualize important tiles given attention.
 def save_relevant(relevant, output_path, set_type):
     relevant_patches, relevant_labels, relevant_indeces, relevant_slides, relevant_weights = relevant
     dt = h5py.special_dtype(vlen=str)
     hdf5_path = os.path.join(output_path, 'hdf5_relevant_tiles_%s.h5' % set_type)
-    with h5py.File(hdf5_path, mode='w') as hdf5_content:   
-        latent_storage = hdf5_content.create_dataset(name='latent', shape=relevant_patches.shape,     dtype=np.float32)
-        label_storage  = hdf5_content.create_dataset(name='label',  shape=relevant_labels.shape,      dtype=np.float32)
-        ind_storage    = hdf5_content.create_dataset(name='indece', shape=relevant_indeces.shape,     dtype=np.float32)
-        slide_storage  = hdf5_content.create_dataset(name='slide',  shape=(len(relevant_slides), 1),  dtype=dt)
-        weight_storage = hdf5_content.create_dataset(name='weight', shape=relevant_weights.shape,     dtype=np.float32)
+    with h5py.File(hdf5_path, mode='w') as hdf5_content:
+        latent_storage = hdf5_content.create_dataset(name='latent', shape=relevant_patches.shape, dtype=np.float32)
+        label_storage = hdf5_content.create_dataset(name='label', shape=relevant_labels.shape, dtype=np.float32)
+        ind_storage = hdf5_content.create_dataset(name='indece', shape=relevant_indeces.shape, dtype=np.float32)
+        slide_storage = hdf5_content.create_dataset(name='slide', shape=(len(relevant_slides), 1), dtype=dt)
+        weight_storage = hdf5_content.create_dataset(name='weight', shape=relevant_weights.shape, dtype=np.float32)
 
         for i in range(relevant_patches.shape[0]):
             latent_storage[i, :] = relevant_patches[i, :]
-            label_storage[i]     = relevant_labels[i]
-            ind_storage[i]       = relevant_indeces[i]
-            slide_storage[i]     = relevant_slides[i]
-            weight_storage[i]    = relevant_weights[i]
+            label_storage[i] = relevant_labels[i]
+            ind_storage[i] = relevant_indeces[i]
+            slide_storage[i] = relevant_slides[i]
+            weight_storage[i] = relevant_weights[i]
+
 
 # Gathers content of H5 files with latent representations.
 def gather_content(hdf5_path, set_type, h_latent=True):
     # Open file for data manipulation. 
     hdf5_content = h5py.File(hdf5_path, mode='r')
     if '%s_img_w_latent' % set_type in list(hdf5_content.keys()):
-        latent   = hdf5_content['%s_img_w_latent' % set_type]
+        latent = hdf5_content['%s_img_w_latent' % set_type]
     else:
         if h_latent:
-            latent   = hdf5_content['%s_img_h_latent' % set_type]
+            latent = hdf5_content['%s_img_h_latent' % set_type]
         else:
-            latent   = hdf5_content['%s_img_z_latent' % set_type]
-    labels   = hdf5_content['%s_labels' % set_type]
+            latent = hdf5_content['%s_img_z_latent' % set_type]
+    labels = hdf5_content['%s_labels' % set_type]
     patterns = np.array(hdf5_content['%s_patterns' % set_type]).astype(str)
-    slides   = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
-    tiles    = hdf5_content['%s_tiles' % set_type]
+    slides = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
+    tiles = hdf5_content['%s_tiles' % set_type]
 
     if 'combined' in set_type:
         patterns = np.array(hdf5_content['combined_hist_subtype']).astype(str)
@@ -455,46 +465,46 @@ def gather_content(hdf5_path, set_type, h_latent=True):
 def gather_content_multi_mag(hdf5_path, set_type, h_latent=True):
     # 'test_20x_img_z_latent', 'test_20x_orig_indices', 'test_5x_img_z_latent', 'test_5x_orig_indices', 'test_pattern', 'test_slides', 'test_tiles'
     # Open file for data manipulation. 
-    hdf5_content     = h5py.File(hdf5_path, mode='r')
+    hdf5_content = h5py.File(hdf5_path, mode='r')
     # Latents
-    latent_20x       = hdf5_content['%s_20x_img_z_latent' % set_type]
-    latent_5x        = hdf5_content['%s_5x_img_z_latent'  % set_type]
+    latent_20x = hdf5_content['%s_20x_img_z_latent' % set_type]
+    latent_5x = hdf5_content['%s_5x_img_z_latent' % set_type]
     # Indices of the original datasets.
     orig_indices_20x = hdf5_content['%s_20x_img_z_latent' % set_type]
-    orig_indices_5x  = hdf5_content['%s_5x_img_z_latent'  % set_type]
+    orig_indices_5x = hdf5_content['%s_5x_img_z_latent' % set_type]
     # Patterns.
     patterns = np.array(hdf5_content['%s_pattern' % set_type]).astype(str)
     # Slides.
-    slides   = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
+    slides = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
     # Tiles.
-    tiles    = hdf5_content['%s_tiles' % set_type]
+    tiles = hdf5_content['%s_tiles' % set_type]
 
     return latent_20x, latent_5x, orig_indices_20x, orig_indices_5x, patterns, slides, tiles
+
 
 def gather_content_multi_magnification(hdf5_path, set_type, h_latent=True):
     # 'test_20x_img_z_latent', 'test_20x_orig_indices', 'test_5x_img_z_latent', 'test_5x_orig_indices', 'test_pattern', 'test_slides', 'test_tiles'
     # Open file for data manipulation. 
-    hdf5_content     = h5py.File(hdf5_path, mode='r')
+    hdf5_content = h5py.File(hdf5_path, mode='r')
     # Latents
-    latent_20x       = hdf5_content['%s_20x_img_z_latent' % set_type]
-    latent_10x       = hdf5_content['%s_10x_img_z_latent' % set_type]
-    latent_5x        = hdf5_content['%s_5x_img_z_latent'  % set_type]
+    latent_20x = hdf5_content['%s_20x_img_z_latent' % set_type]
+    latent_10x = hdf5_content['%s_10x_img_z_latent' % set_type]
+    latent_5x = hdf5_content['%s_5x_img_z_latent' % set_type]
     # Indices of the original datasets.
     orig_indices_20x = hdf5_content['%s_20x_img_z_latent' % set_type]
     orig_indices_10x = hdf5_content['%s_10x_img_z_latent' % set_type]
-    orig_indices_5x  = hdf5_content['%s_5x_img_z_latent'  % set_type]
+    orig_indices_5x = hdf5_content['%s_5x_img_z_latent' % set_type]
     # Patterns.
     if '%s_pattern' % set_type in hdf5_content.keys():
         patterns = np.array(hdf5_content['%s_pattern' % set_type]).astype(str)
     else:
         patterns = np.array(hdf5_content['%s_patterns' % set_type]).astype(str)
     # Slides.
-    slides   = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
+    slides = np.array(hdf5_content['%s_slides' % set_type]).astype(str)
     # Tiles.
-    tiles    = hdf5_content['%s_tiles' % set_type]
+    tiles = hdf5_content['%s_tiles' % set_type]
 
     if 'combined' in set_type:
         patterns = np.array(hdf5_content['combined_hist_subtype']).astype(str)
 
     return latent_20x, latent_10x, latent_5x, orig_indices_20x, orig_indices_10x, orig_indices_5x, patterns, slides, tiles
-    
